@@ -36,18 +36,15 @@ namespace Shopping.Controllers
 
             return View(country);
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Countries/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Create(Country country)
         {
             if (ModelState.IsValid)
             {
@@ -57,8 +54,6 @@ namespace Shopping.Controllers
             }
             return View(country);
         }
-
-        // GET: Countries/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -66,7 +61,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            var country = await _context.Countries.FindAsync(id);
+            Country country = await _context.Countries.FindAsync(id);
             if (country == null)
             {
                 return NotFound();
